@@ -13,3 +13,8 @@ class dog(animal):
 class cat(animal):
     def sound(self):
         print('Miau!')
+
+my_dog = dog('Rex' ,3)
+my_cat = cat('fushi', 2)
+my_dog.sound()
+my_cat.sound()
