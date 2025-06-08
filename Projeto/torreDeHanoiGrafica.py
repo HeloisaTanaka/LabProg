@@ -1,14 +1,7 @@
-#Desenvolva uma interface onde o usuário possa interativamente mover os discos 
-# (por exemplo, 3 a 5 discos) entre as três hastes O sistema deve validar cada
-#  movimento de acordo com as regras da Torre de Hanói (só se pode mover um disco 
-# de cada vez, e um disco maior nunca pode ser colocado sobre um menor). 
-# O objetivo é que o usuário resolva o quebra-cabeça.
-
-pino1 = [4, 3, 2, 1]
+pino1 = ['-------', ' -----', '  ---', '   -']
 pino2 = []
 pino3 = []
 jogadas = 0
-
 
 def verificar(pinoO, pinoD):
     if not pinoD:
@@ -27,7 +20,18 @@ print('Para escolher a segunda torre, digite 2')
 print('Para escolher a terceira torre, digite 3')
 
 while(True):
-    print(pino1, '\n', pino2, '\n', pino3)
+    print('Torre 1')
+    for i in reversed(pino1):
+        print(i)
+    print('*'*20)
+    print('Torre 2')
+    for i in reversed(pino2):
+        print(i)
+    print('*'*20)
+    print('Torre 3')
+    for i in reversed(pino3):
+        print(i)
+
     print("Mover disco: ")
     origem, destino = map(int, input().split())
     jogadas += 1
