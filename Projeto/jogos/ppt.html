@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra, Papel e Tesoura | GameHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 min-h-screen text-white">
+    <header class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="GameHub Logo" class="h-12">
+                </a>
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">GameHub</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="../index.html" class="hover:text-purple-300 transition">Voltar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <section class="max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-center">Pedra, Papel e Tesoura</h2>
+            
+            <div class="bg-gray-800 rounded-lg p-8">
+                <div class="game-area flex flex-col items-center">
+                    <div class="choices flex justify-between w-full mb-12">
+                        <div class="opponent-choice text-center">
+                            <h3 class="text-xl font-bold mb-4">Oponente</h3>
+                            <div class="choice-display bg-gray-900 rounded-full w-32 h-32 flex items-center justify-center mx-auto">
+                                <p class="text-gray-400">?</p>
+                            </div>
+                        </div>
+                        
+                        <div class="vs-display flex items-center justify-center px-8">
+                            <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">VS</span>
+                        </div>
+                        
+                        <div class="player-choice text-center">
+                            <h3 class="text-xl font-bold mb-4">Você</h3>
+                            <div class="choice-display bg-gray-900 rounded-full w-32 h-32 flex items-center justify-center mx-auto">
+                                <p class="text-gray-400">Escolha</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-display bg-gray-900 rounded-lg p-4 mb-8 w-full text-center">
+                        <h3 class="text-xl font-bold mb-2">Resultado</h3>
+                        <p class="text-2xl font-bold text-purple-400">Faça sua jogada!</p>
+                    </div>
+                    
+                    <div class="player-options grid grid-cols-3 gap-4 mb-8">
+                        <button class="choice-btn bg-gray-700 hover:bg-purple-600 text-white p-4 rounded-lg transition flex flex-col items-center">
+                            <span class="text-4xl mb-2">✊</span>
+                            <span>Pedra</span>
+                        </button>
+                        <button class="choice-btn bg-gray-700 hover:bg-purple-600 text-white p-4 rounded-lg transition flex flex-col items-center">
+                            <span class="text-4xl mb-2">✋</span>
+                            <span>Papel</span>
+                        </button>
+                        <button class="choice-btn bg-gray-700 hover:bg-purple-600 text-white p-4 rounded-lg transition flex flex-col items-center">
+                            <span class="text-4xl mb-2">✌️</span>
+                            <span>Tesoura</span>
+                        </button>
+                    </div>
+                    
+                    <div class="stats w-full bg-gray-900 rounded-lg p-4">
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <p class="text-gray-400">Vitórias</p>
+                                <p class="text-2xl font-bold">0</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400">Empates</p>
+                                <p class="text-2xl font-bold">0</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400">Derrotas</p>
+                                <p class="text-2xl font-bold">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 rounded-lg p-6 mt-8">
+                <h3 class="text-xl font-bold mb-4">Histórico de Partidas</h3>
+                <div class="history-list space-y-2">
+                    <div class="bg-gray-900 rounded-lg p
