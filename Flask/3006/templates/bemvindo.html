@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Bem-vindo</title>
+    <link rel="stylesheet" href="css/bemvindo.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 20%;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.3em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao Meu Site, {{ user }}!</h1>
+        <p>Fique à vontade para explorar.</p>
+    </div>
+</body>
+</html>
