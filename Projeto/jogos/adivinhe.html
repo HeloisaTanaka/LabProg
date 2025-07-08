@@ -1,16 +1,83 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adivinhe o número</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Adivinhe o Número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .game-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        input[type="number"] {
+            padding: 10px;
+            width: 100px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #message {
+            margin: 20px 0;
+            font-size: 18px;
+            min-height: 27px;
+        }
+        
+        #attempts {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <div class="container mx-auto text-center py-10">
-        <h1 class="text-4xl font-bold mb-6">Jogo da Forca</h1>
-        <p class="text-lg mb-4">Tente adivinhar a palavra antes de esgotar suas chances.</p>
-        <button class="bg-green-600 p-4 rounded-lg hover:bg-green-700">Iniciar Jogo</button>
+<body>
+    <div class="game-container">
+        <h1>Adivinhe o Número</h1>
+        <p>Estou pensando em um número entre 1 e 100. Tente adivinhar!</p>
+        
+        <div>
+            <input type="number" id="guessInput" min="1" max="100" required>
+            <button id="guessButton">Adivinhar</button>
+        </div>
+        
+        <div id="message"></div>
+        <div id="attempts">Tentativas: 0</div>
     </div>
+
+    <!-- O JavaScript seria adicionado aqui -->
+    <script>
+        // A lógica do jogo seria implementada aqui
+    </script>
 </body>
 </html>
