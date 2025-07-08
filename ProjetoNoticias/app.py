@@ -4,8 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 #Fazer as preferência de tema
 #Fazer a última página acessada
 
-
-
 app = Flask(__name__)
 app.secret_key = '123'
 
