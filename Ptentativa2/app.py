@@ -17,7 +17,6 @@ def login():
             resposta = make_response(redirect(url_for('home')))
             resposta.set_cookie('username', user, max_age=60*30)
             return resposta
-            #session['username'] = user
         else:
             mensagem = 'Usuário ou senha inválidos'
     return render_template('login.html', mensagem = mensagem)
@@ -33,30 +32,72 @@ def home():
     else:
         session['counter'] = 1
 
+    tema = request.cookies.get('tema')
+    if not tema:
+        tema = 'claro'
+
     last_page = request.cookies.get('last_page')
+
     if not last_page:
-        return render_template('home.html', user=user, counter=str(session['counter']))
+        return render_template('home.html', user=user, counter=str(session['counter']), tema=tema)
     else:
-        return render_template('home.html', user=user, counter=str(session['counter']), last_page = last_page)
+        return render_template('home.html', user=user, counter=str(session['counter']), tema=tema, last_page = last_page)
+    
+    
+@app.route('/atualizar_conteudo')
+def conteudo():
+    user = request.cookies.get('username')
+    page = request.cookies.get('last_page')
+    tema = request.cookies.get('tema')
+    return render_template('home.html', page=page, tema=tema, user=user, counter = session['counter'])
 
 @app.route('/page', methods=['POST'])
 def page():
-    user = request.cookies.get('username')
     if request.method == 'POST':
         if request.form["page"] == 'esportes':
-            response = make_response(render_template('home.html', page='esportes', user = user, counter=str(session['counter'])))
+            response = make_response(redirect(url_for('conteudo')))
             response.set_cookie('last_page', 'esportes', max_age=60*30)
         elif request.form['page'] == 'entretenimento':
-            response = make_response(render_template('home.html', page='entretenimento', user = user, counter=str(session['counter'])))
+            response = make_response(redirect(url_for('conteudo')))
             response.set_cookie('last_page', 'entretenimento', max_age=60*30)
         elif request.form['page'] == 'lazer':
-            response = make_response(render_template('home.html', page='lazer', user = user, counter=str(session['counter'])))
+            response = make_response(redirect(url_for('conteudo')))
             response.set_cookie('last_page', 'lazer', max_age=60*30)
         else:
             return render_template('home.html', page='erro')
+        
         return response
 
-
+@app.route('/tema', methods=['POST'])
+def tema():
+    if request.method == 'POST':
+        if request.form['tema'] == 'claro':
+            response = redirect(url_for('conteudo'))
+            response.set_cookie('tema', 'claro', max_age=60*30)
+        elif request.form['tema'] == 'escuro':
+            response = redirect(url_for('conteudo'))
+            response.set_cookie('tema', 'escuro', max_age=60*30)
+        return response
+        
+@app.route('/logout', methods=['POST'])
+def logout():
+    response = make_response(redirect(url_for('login')))
+    response.set_cookie('username', '', expires=0)
+    response.set_cookie('tema', '', expires=0)
+    response.set_cookie('last_page', '', expires=0)
+    session['counter'] = 0
+    return response
+    #Professor, apesar das expecificações do moodle, acreditei fazer mais sentido apagar todos os dados
+    #armazenados no cookie ao dar logout, visto que numa aplicação real, o usuário seguinte não teria as
+    #mesmas preferências que o anterior.
+    #Caso o senhor prefira que os dados sejam mantidos, com exceção do número de acessos e nome de usuário,
+    #segue o código conforme expecificação do moodle:
+    #@app.route('/logout', methods=['POST'])
+    #def logout():
+        #response = make_response(redirect(url_for('login')))
+        #response.set_cookie('username', '', expires=0)
+        #session['counter'] = 0
+        #return response
 
 if __name__ == '__main__':
     app.run(debug=True)
