@@ -1,33 +1,31 @@
-//script da ana
-let email=document.getElementById('email')
-let user=document.getElementById('username')
-let senha=document.getElementById('password')
-let mensagemText =document.getElementById("message");
-let botao=document.getElementById('submit')
-let form=document.getElementById('form')
+var username = document.getElementById("username")
+var email = document.getElementById("email")
+var password = document.getElementById("password")
+var message = document.getElementById('message')
 
-function validarMensagem(){
-    console.log("to na validacao")
-    if (!email.value || !user.value || !senha.value) {
-        //alert("oi")
-        mensagemText.innerText = "Por favor, preencha todos os campos.";
-        mensagemText.style.color = "red";
-        console.log("dd")
-        return; 
 
+function verificaCampos (){
+    if (!username.value || !email.value || !password.value){
+        var mensagem = 'Todos os campos são obrigatórios' 
     }
-    let valor=email.value
-    if (!valor.includes("@gmail.com")&&!valor.includes("@yahoo.com")&&!valor.includes("@hotmail.com")){
-       // alert("tchau")
-        mensagemText.innerText = "Por favor, preencha o email corretamente.";
-        mensagemText.style.color = "red";
-        console.log("dd")
-        return; 
+    else if (!email.value.includes('@gmail.com') && !email.value.includes('@yahoo.com') && !email.value.includes('@hotmail.com') || email.value.startsWith('@')){
+        var mensagem = 'Email inválido'  
     }
-
+    else{
+       var mensagem = 'Cadastro realizado com sucesso'
+        
+    }
+    localStorage.setItem('message', mensagem)
 }
 
-botao.addEventListener("click", (e)=>{
-   // e.preventDefault()
-    validarMensagem()
+addEventListener('submit', ()=> {
+   verificaCampos()
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mensagemSalva = localStorage.getItem('message');
+    if (mensagemSalva) {
+        document.getElementById('message').textContent = mensagemSalva;
+    }
+})
+
