@@ -3,7 +3,7 @@ Repositório destinado a anotações e atividades da discplina técnica Laborat�
 
 ## 💻: Conteúdos abordados:
 - `POO`: propriedades, métodos, hereditariedade
-- `Flask`: rotas, static folder, integração com arquivos .js e .html
+- `Flask`: routes, extends, cookies, session, static, flash
 
 ## 📔 : Detalhes:
 - `Curso`: Desenvolvimento de Sistemas Integrado ao Ensino Médio
