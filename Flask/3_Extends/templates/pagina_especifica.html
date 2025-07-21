@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block tittle %} Página específica - Meu site {% endblock %}
+{% block header %} <h1> Página específica - Meu site </h1>{% endblock %}
+{% block content %}
+
+    <h2>Conteúdo da página específica</h2>
+    <p>Este contepudo está dentro do bloco 'Content'</p>
+
+{% endblock %}
+
+<!--
+extends 'base.html' utiliza o html do base.html, porém os conteúdos marcados 
+                    por block na base podem ser alterados na página extends,
+                    como é o caso do black tittle e do block content.
+-->

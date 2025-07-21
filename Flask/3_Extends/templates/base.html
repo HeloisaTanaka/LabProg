@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block tittle %}Meu site{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% block header %}<h1>Meu incrível site</h1>{% endblock %}
+    </header>
+    <main>
+        {% block content %}
+            <form action="/paginaEspecifica" method="POST">
+                <input type="submit" name="pagina_especifica"></input>
+                <!--Quando o forms receber o submit, executará a rota /pagina_especifica do file app.py -
+                por causa do action="pagina_especifica"-->
+            </form>
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2025</p>
+    </footer>
+</body>
+</html>
