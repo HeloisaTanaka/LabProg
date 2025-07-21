@@ -2,7 +2,7 @@
 Repositório destinado a anotações e atividades da discplina técnica Laboratório de Programação (SPOLBP1) 
 
 ## 💻: Conteúdos abordados:
-- `POO`: propriedades, métodos, hereditariedade
+- `POO`: classes, propriedades, métodos, hereditariedade
 - `Flask`: routes, extends, cookies, session, static, flash
 
 ## 📔 : Detalhes:
