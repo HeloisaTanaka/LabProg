@@ -12,16 +12,16 @@ def paginaEspecifica():
     match(page):
         case 'noticias':
             return render_template('noticias.html')
-        case 'comics':
-            return render_template('comics.html')
-        case 'filmes':
-            return render_template('filmes.html')
-        case 'jogos':
-            return render_template('jogos.html')
-        case 'mais':
-            return render_template('mais.html')
+        case 'cadastro':
+            return render_template('cadastro.html')
+        case 'eventos':
+            return render_template('eventos.html')
+        case 'login':
+            return render_template('login.html')
+        case 'premiações':
+            return render_template('premiações.html')
     
-    #notícias, comics, filmes, jogos, mais
+
 
 if __name__=='__main__':
     app.run(debug=True)
