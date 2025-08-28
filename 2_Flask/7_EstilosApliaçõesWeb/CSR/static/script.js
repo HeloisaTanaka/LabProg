@@ -60,6 +60,7 @@ addEventListener('DOMContentLoaded', () => {
     .then(([dados_banners, dados_artistas, dados_destaques]) => {
       let pagina = `
       <section class="hero" aria-label="Em alta">
+      <h1>Aplicação CSR</h1>
       <div class="hero-strip" >`
 
       for (item of dados_banners){
@@ -165,8 +166,8 @@ addEventListener('DOMContentLoaded', () => {
       }
 
       evento += `
-      </section>
-      </div>
+        </div>
+        </section>
       `
       conteudoHTML.innerHTML = evento
     })
