@@ -22,7 +22,7 @@ def carregarIndex():
         {'categoria': 'FESTIVAL', 'alt': 'Primavera Sound', 'titulo': 'Primavera Sound São Paulo 2025?', 'img': 'https://imgs.search.brave.com/nDN3BuLHFjbshIFF2aGoIvswS45POB6d4mfS9YxZsUk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mLmku/dW9sLmNvbS5ici9m/b3RvZ3JhZmlhLzIw/MjEvMTIvMDkvMTYz/OTA1NzkwOTYxYjIw/OWY1NjEwN2JfMTYz/OTA1NzkwOV8zeDJf/bWQuanBn', 'url': 'https://cadernopop.com.br/primavera-sound-sao-paulo-2025-saiba-qual-seria-o-nosso-line-up-dos-sonhos/' }
         ]
         artistas = [
-        {'nome': 'Bruno Mars', 'foto': 'https://preview.redd.it/what-is-your-favorite-bruno-mars-pic-this-is-my-fav-and-its-v0-p3impgmpeygd1.jpeg?width=1080&crop=smart&auto=webp&s=6b926af4249d70f30cde1efe7f17c381e88ea6dd'}, 
+        {'nome': 'Bruno Mars', 'foto': 'https://s2-gshow.glbimg.com/62OpDq3_vGO2mwObCHaCk3nDiX8=/0x0:1076x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2023/P/Y/apSIdkRvSQTJvg2LVGaw/bruno-mars.jpg'}, 
         {'nome': 'Lady Gaga', 'foto': "https://imgs.search.brave.com/ueu5h-r-SHSXNiCS6wA83A6a3EGnzS_qsBCSLNRzPjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dmFnYWx1bWUuY29t/LmJyL2xhZHktZ2Fn/YS9kaXNjb2dyYWZp/YS9tYXloZW0ud2Vi/cA"}, 
         {'nome': 'The Weekend', 'foto':"https://imgs.search.brave.com/QdOgKqmehK9w3DpTb-tn_SplDf1TuhyVuGomD3PCNHc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXQuY29t/L3cvZnVsbC9lLzAv/NC8xOTM4NzEtMTky/MHgxMDgwLWRlc2t0/b3AtMTA4MHAtdGhl/LXdlZWtuZC13YWxs/cGFwZXItaW1hZ2Uu/anBn"},
         {'nome': 'Taylor Swift', 'foto':"https://imgs.search.brave.com/egwKoUW8YEn_pBA3-BXSXm3asgF20znPstGsqv2NPTs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mLmku/dW9sLmNvbS5ici9m/b3RvZ3JhZmlhLzIw/MjQvMTAvMTQvMTcy/ODkxMjc1NTY3MGQx/ZDczYjlkZTlfMTcy/ODkxMjc1NV8zeDJf/bWQuanBn"}, 
