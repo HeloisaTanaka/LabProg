@@ -47,7 +47,7 @@
       </div>
     </nav>
   </header>
- 
+
   {% if pagina == 'index' %}
   <section class="hero" aria-label="Em alta">
     <h1>Aplicação SSR</h1>
@@ -97,9 +97,11 @@
         {% endfor %}
     </div>
   </section>
-  {% elif pagina == 'noticias' %}
+  {% else %}
   <section class="section" aria-label="Destaques">
     <div class="grid">
+  {% if pagina == 'noticias' %}
+   
     {% for noticia in noticias %}
     <article class="card">
         <img class="cover" src="{{ noticia.img }}" alt="" />
@@ -109,11 +111,7 @@
         </div>
     </article>  
     {% endfor %}
-    </div>
-  </section>
   {% elif pagina == 'eventos' %}
-  <section class="section" aria-label="Destaques">
-    <div class="grid">
     {% for evento in eventos %}
     <article class="card">
         <img class="cover" src="{{ evento.img }}" alt="" />
@@ -123,11 +121,8 @@
         </div>
     </article>
     {% endfor %}
-    </div>
-  </section>
   {% else %}
-  <section class="section" aria-label="Destaques">
-    <div class="grid">
+  
         {% for premio in premiacoes %}
         <article class="card">
             <img class="cover" src="{{ premio.img }}" alt="" />
@@ -137,9 +132,10 @@
             </div>
         </article>
         {% endfor %}
-    </div>
-  </section>
   {% endif %}
+  {% endif %}
+</div>
+</section>
   <!-- ======= FOOTER ======= -->
   <footer>
     <div class="foot">
