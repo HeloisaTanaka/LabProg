@@ -25,13 +25,121 @@ function carrossel(){
     }
 
 const menuHTML = document.getElementById('menu')
+const footHTML = document.getElementById('foot')
 const conteudoHTML = document.getElementById("conteudo")
 
 addEventListener('DOMContentLoaded', () => {
+  let menu
+  let foot
+  if (document.body.id == 'login' || document.body.id=='cadastro'){
+    menu = `
+    <nav class="nav">
+            <a class="brand" href="/" aria-label="Coda — Início">
+                <span class="logo" aria-hidden="true"></span>
+                <span>CODA</span>
+            </a>
+      </nav>
+    `
+    menuHTML.innerHTML = menu
+    if (document.body.id == 'login'){
+      fetch('/api/login')
+      .then(response => response.json())
+      .then(dados_forms => {
+
+        let conteudo = `
+       <main class="center" style="min-height: calc(100vh - 120px); padding: 20px;">
+        <div class="card" style="max-width: 400px; width: 100%; padding: 32px; box-shadow: var(--shadow);">
+            <h2 style="text-align:center; margin-bottom: 24px;">Entrar no Coda</h2>
+            
+            <form action="/logar" method="POST" style="display: grid; gap: 16px;"> `
+
+        for (item of dados_forms){
+          conteudo += `
+                <!-- Email/Username -->
+                <div>
+                    <label for="${item.for}" class="muted" style="display:block; margin-bottom:6px;">${item.nome}</label>
+                    <input type="text" id="${item.id}" name="${item.name}" placeholder="${item.placeholder}"
+                        style="width:100%; padding:12px; border-radius:999px; border:1px solid var(--glass-border); background:var(--glass); color:var(--text); outline:none; transition: var(--transition);">
+                </div>`
+
+        }
+        conteudo += `
+        <!-- Remember Me -->
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <input type="checkbox" id="remember" name="remember" value="remember">
+                    <label for="remember" class="muted">Lembrar de mim</label>
+                </div>
+                
+                <!-- Login Button -->
+                <button type="submit" class="login-btn" id="login-btn" style="width:100%;">Entrar</button>
+            </form>
+
+            <!-- Links adicionais -->
+            <div style="text-align:center; margin-top:16px;">
+                <a href="#" class="btn-link">Esqueceu a senha?</a> | 
+                <a href="mudarCadastro" class="btn-link">Criar conta</a>
+            </div>
+        </div>
+    </main>
+        `
+        conteudoHTML.innerHTML = conteudo
+      })
+    }
+    else {
+      fetch('/api/cadastro')
+      .then(response => response.json())
+      .then(dados_cadastro => {
+      let conteudo = `
+            <main class="center" style="min-height: calc(100vh - 120px); padding: 20px;">
+              <div class="card" style="max-width: 450px; width: 100%; padding: 32px; box-shadow: var(--shadow);">
+                  <h2 style="text-align:center; margin-bottom: 24px;">Crie sua conta no Coda</h2>
+                  
+                  <form action="/cadastrar" method="POST" style="display: grid; gap: 16px;">`
+      for (item of dados_cadastro){
+        conteudo += `
+        <div>
+            <label for="${item.for}" class="muted" style="display:block; margin-bottom:6px;">${item.nome}</label>
+            <input type="${item.type}" id="${item.id}" name="${item.name}" placeholder="${item.placeholder}"
+              style="width:100%; padding:12px; border-radius:999px; border:1px solid var(--glass-border); background:var(--glass); color:var(--text); outline:none; transition: var(--transition);">
+        </div>
+        `
+      }  
+      conteudo += `
+                <!-- Botão de Cadastro -->
+                <button type="submit" class="login-btn" style="width:100%;">Cadastrar</button>
+            </form>
+
+            <!-- Link para login -->
+            <div style="text-align:center; margin-top:16px;">
+                <span class="muted">Já possui uma conta? </span>
+                <a href="/mudarLogin" class="btn-link">Entrar</a>
+            </div>
+        </div>
+    </main>
+      `
+      conteudoHTML.innerHTML = conteudo
+      })
+    }
+  }
+  
+  else {
   fetch('/api/menu')
   .then(response => response.json())
   .then(dados_menu => {
-    let menu = `
+    menu = `
+    <nav class="nav">
+      <a class="brand" href="/" aria-label="SomVerso — Início">
+        <span class="logo" aria-hidden="true"></span>
+        <span>CODA</span>
+      </a>
+
+      <form class="search" role="search">
+        <input type="search" placeholder="Buscar artistas, músicas, festivais…" aria-label="Buscar" />
+        <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </form>
+
+
+      <div class="right">
       <ul class="menu" aria-label="Navegação principal">
     `
     for(const item of dados_menu){
@@ -47,7 +155,13 @@ addEventListener('DOMContentLoaded', () => {
         </li>
         `
     }
-    menu += `</ul>`
+    menu += `</ul>
+    <a href="/mudarLogin" style="text-decoration: none;">
+          <button type="button" class="login-btn" aria-label="Entrar">Entrar</button>  
+        </a>
+        <button class="tema-btn" type="button" aria-label="Tema">Tema</button>
+      </div>
+    </nav>`
     menuHTML.innerHTML = menu
   })
 
@@ -118,87 +232,66 @@ addEventListener('DOMContentLoaded', () => {
       carrossel()
     })
   }
-  else if(document.body.id == 'noticias'){
+  else {
+    if(document.body.id == 'noticias'){
     fetch('/api/noticias')
     .then(response => response.json())
     .then(dados_noticias => {
-      let noticia = `
-      <section class="section" aria-label="Destaques">
-      <div class="grid">
-      `
+      reenderizar(dados_noticias, 'Notícias') 
+    })
+    }
+    else if(document.body.id == 'eventos'){
+      fetch('/api/eventos')
+      .then(response => response.json())
+      .then(dados_eventos => {
+        reenderizar(dados_eventos, 'Eventos')
+      })
+    }
+    else if(document.body.id == 'premiacoes'){
+      fetch('/api/premiacoes')
+      .then(response => response.json())
+      .then(dados_premiacoes => {
+        reenderizar(dados_premiacoes, 'Premiações')
+      })
+    }
+  }
+  }
+  foot = `
+  <div>
+        <strong>Coda</strong> — Portal de música moderno. 
+      </div>
+      <div class="social" aria-label="Redes sociais">
+        <span class="dot" title="Instagram"></span>
+        <span class="dot" title="X/Twitter"></span>
+      <span class="dot" title="YouTube"></span>
+      </div>
+  `
+  footHTML.innerHTML = foot
+})
 
-      for(item of dados_noticias){
-        noticia += `
+
+function reenderizar (dados, pagina){
+    let paginaConteudo = `
+          <section class="section" aria-label="Destaques">
+          <div class="grid">
+        `
+    for (item of dados){
+      paginaConteudo += `
         <article class="card">
           <img class="cover" src="${item.img}" alt="" />
-          <div class="body">
-            <span class="chip">Notícias</span>
-            <h3 class="title-sm">${item.titulo}</h3>
-          </div>
-        </article>  
+            <div class="body">
+              <span class="chip chip--pink">${pagina}</span>
+              <h3 class="title-sm">${item.titulo}</h3>
+            </div>
+        </article>
         `
-      }
-      noticia += `
+    }
+
+    paginaConteudo += `
       </div>
       </section>
       `
-      conteudoHTML.innerHTML = noticia
-    })
-  }
-  else if(document.body.id == 'eventos'){
-    fetch('/api/eventos')
-    .then(response => response.json())
-    .then(dados_eventos => {
-      let evento = `
-        <section class="section" aria-label="Destaques">
-        <div class="grid">
-      `
-      for (item of dados_eventos){
-        evento += `
-          <article class="card">
-             <img class="cover" src="${item.img}" alt="" />
-              <div class="body">
-                <span class="chip chip--pink">Eventos</span>
-                <h3 class="title-sm">${item.titulo}</h3>
-              </div>
-          </article>
-        `
-      }
-
-      evento += `
-        </div>
-        </section>
-      `
-      conteudoHTML.innerHTML = evento
-    })
-  }
-  else if(document.body.id == 'premiacoes'){
-    fetch('/api/premiacoes')
-    .then(response => response.json())
-    .then(dados_premiacoes => {
-      let premio = `
-        <section class="section" aria-label="Destaques">
-        <div class="grid">
-      `
-      for (item of dados_premiacoes){
-        premio += `
-        <article class="card">
-                <img class="cover" src="${item.img}" alt="" />
-                <div class="body">
-                    <span class="chip">Premiações</span>
-                    <h3 class="title-sm">${item.titulo}</h3>
-                </div>
-            </article>
-        `
-      }
-
-      premio += `
-      </div>
-      </section>
-      `
-      conteudoHTML.innerHTML = premio
-
-    })
+    conteudoHTML.innerHTML = paginaConteudo
   }
 
-})
+

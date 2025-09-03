@@ -10,6 +10,8 @@
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
+
 <body id="{{ body_id }}">
   <!-- ======= NAVBAR ======= -->
   <header class="topbar">
@@ -18,7 +20,7 @@
         <span class="logo" aria-hidden="true"></span>
         <span>CODA</span>
       </a>
-
+{% block content %}
       <!-- Barra de pesquisa -->
       <form class="search" role="search">
         <input type="search" placeholder="Buscar artistas, músicas, festivais…" aria-label="Buscar" />
@@ -136,6 +138,9 @@
   {% endif %}
 </div>
 </section>
+
+{% endblock %}
+
   <!-- ======= FOOTER ======= -->
   <footer>
     <div class="foot">

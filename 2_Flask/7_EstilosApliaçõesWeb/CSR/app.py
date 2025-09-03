@@ -34,11 +34,11 @@ def paginaPremicoes():
 
 @app.route('/mudarLogin', methods=['GET'])
 def paginaLogin():
-    return render_template('login.html')
+    return render_template('index.html', body_id = 'login')
 
 @app.route('/mudarCadastro', methods=['GET'])
 def paginaCadastro():
-    return render_template('cadastro.html')
+    return render_template('index.html', body_id = 'cadastro')
 
 @app.route('/logar', methods=['POST'])
 def logar():
@@ -54,7 +54,7 @@ def logar():
             app.permanent_session_lifetime = timedelta(days=7)  
         return redirect(url_for('carregarIndex'))  
     
-    return render_template('login.html', mensagem='Usuário ou senha incorretos.')  
+    return render_template('index.html', mensagem='Usuário ou senha incorretos.', body_id = 'login')  
 
 @app.route('/cadastrar', methods=['POST'])
 def cadastrar():
@@ -65,16 +65,16 @@ def cadastrar():
     password2 = request.form['confirm_password']
 
     if not name or not email or not user or not password or not password2:
-        return render_template('cadastro.html', mensagem = 'Preencha todos os campos')
+        return render_template('index.html', mensagem = 'Preencha todos os campos', body_id = 'cadastro')
 
     if password == password2:  
         if user not in users: 
             users[user] = password  
             return redirect(url_for('paginaLogin'))  
         else:
-            return render_template('cadastro.html', mensagem='Este nome de usuário já está em uso.')  
+            return render_template('index.html', mensagem='Este nome de usuário já está em uso.', body_id = 'cadastro')  
     else:
-        return render_template('cadastro.html', mensagem='As senhas não coincidem.')  
+        return render_template('index.html', mensagem='As senhas não coincidem.', body_id = 'cadastro')  
 
 @app.route('/api/menu')
 def api_menu():
@@ -164,6 +164,25 @@ def api_premiacoes():
     {'titulo': 'Cantora vence duas vezes na mesma categoria com músicas lançadas no mesmo mês','img': 'https://images.unsplash.com/photo-1604658243847-17375af581fa?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmVuY2Vkb3JhfGVufDB8MHwwfHx8MA%3D%3D'},
     ]
     return jsonify(premiacoes)
+
+@app.route('/api/login')
+def forms():
+    forms = [
+        {'for': 'username', 'nome': 'Usuário', 'type': 'text', 'id': 'username', 'name': 'username', 'placeholder': 'Digite seu Usuário'}, 
+        {'for': 'password', 'nome': 'Senha', 'type': 'password', 'id': 'password', 'name': 'password', 'placeholder': 'Digite sua Senha'}, 
+    ]
+    return jsonify(forms)
+
+@app.route('/api/cadastro')
+def formsCadastro():
+    formsCadastro = [
+        {'for': 'name', 'nome': 'Nome Completo', 'id': 'name', 'name': 'name', 'placeholder': 'Digite o seu nome','type': 'text'},
+        {'for': 'email', 'nome': 'Email', 'id': 'email', 'name': 'email', 'placeholder': 'Digite o seu email','type': 'email'},
+        {'for': 'username', 'nome': 'Usuário', 'id': 'username', 'name': 'username', 'placeholder': 'Escolha um nome de usuário','type': 'text'},
+        {'for': 'password', 'nome': 'Senha', 'id': 'password', 'name': 'password', 'placeholder': 'Digite sua senha','type': 'password'},
+        {'for': 'confirm_password', 'nome': 'Confirmar Senha', 'id': 'confirm_password', 'name': 'confirm_password', 'placeholder': 'Confirme a sua senha','type': 'password'}
+    ]
+    return jsonify(formsCadastro)
 
 if __name__ == '__main__':
     app.run(debug=True)
