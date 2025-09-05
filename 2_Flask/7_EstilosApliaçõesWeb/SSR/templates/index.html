@@ -102,39 +102,18 @@
   {% else %}
   <section class="section" aria-label="Destaques">
     <div class="grid">
-  {% if pagina == 'noticias' %}
+
    
-    {% for noticia in noticias %}
+    {% for item in conteudo %}
     <article class="card">
-        <img class="cover" src="{{ noticia.img }}" alt="" />
+        <img class="cover" src="{{ item.img }}" alt="" />
         <div class="body">
             <span class="chip">Notícias</span>
-            <h3 class="title-sm">{{ noticia.titulo }}</h3>
+            <h3 class="title-sm">{{ item.titulo }}</h3>
         </div>
     </article>  
     {% endfor %}
-  {% elif pagina == 'eventos' %}
-    {% for evento in eventos %}
-    <article class="card">
-        <img class="cover" src="{{ evento.img }}" alt="" />
-        <div class="body">
-            <span class="chip chip--pink">Eventos</span>
-            <h3 class="title-sm">{{ evento.titulo }}</h3>
-        </div>
-    </article>
-    {% endfor %}
-  {% else %}
   
-        {% for premio in premiacoes %}
-        <article class="card">
-            <img class="cover" src="{{ premio.img }}" alt="" />
-            <div class="body">
-                <span class="chip">Premiações</span>
-                <h3 class="title-sm">{{ premio.titulo }}</h3>
-            </div>
-        </article>
-        {% endfor %}
-  {% endif %}
   {% endif %}
 </div>
 </section>

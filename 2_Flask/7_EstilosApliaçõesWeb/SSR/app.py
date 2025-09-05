@@ -60,7 +60,7 @@ def paginaNoticias():
         {'titulo': 'Pesquisadores criam algoritmo capaz de prever qual música será um hit em até 80% dos casos', 'img': 'https://plus.unsplash.com/premium_photo-1661882403999-46081e67c401?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWxnb3JpdG1vfGVufDB8MHwwfHx8MA%3D%3D'},
         {'titulo': 'Pesquisadores afirmam que ouvir 10 minutos de funk melhora a memória de curto prazo', 'img': 'https://images.unsplash.com/photo-1483821838526-8d9756a6e1ed?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnVua3xlbnwwfDB8MHx8fDA%3D '}
         ]
-        return render_template('index.html', pagina = 'noticias', menu=menu, noticias=noticias)
+        return render_template('index.html', pagina = 'noticias', menu=menu, conteudo=noticias)
     return redirect(url_for('paginaLogin'))  
 
 @app.route('/mudarEventos', methods=['GET'])
@@ -82,7 +82,7 @@ def paginaEventos():
         {'titulo': 'Evento reúne orquestra sinfônica e DJs tocando simultaneamente em palcos giratórios','img': 'https://images.unsplash.com/photo-1576514129883-2f1d47a65da6?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGFsY29zfGVufDB8MHwwfHx8MA%3D%3D'},
         {'titulo': 'Show surpresa em uma estação de metrô paralisou a cidade por 2 horas','img': 'https://plus.unsplash.com/premium_photo-1661876638101-e83e45eaeacc?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWV0ciVDMyVCNHxlbnwwfDB8MHx8fDA%3D'},
         ]
-        return render_template('index.html', pagina = 'eventos', menu=menu, eventos=eventos)
+        return render_template('index.html', pagina = 'eventos', menu=menu, conteudo=eventos)
     return redirect(url_for('paginaLogin'))
 
 @app.route('/mudarPremiacoes', methods=['GET'])
@@ -104,7 +104,7 @@ def paginaPremicoes():
         {'titulo': 'Troféu de premiação é impresso em 3D em tempo real no palco','img': 'https://images.unsplash.com/photo-1625643268477-838321f445bb?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHRyb2ZldXxlbnwwfDB8MHx8fDA%3D'},
         {'titulo': 'Cantora vence duas vezes na mesma categoria com músicas lançadas no mesmo mês','img': 'https://images.unsplash.com/photo-1604658243847-17375af581fa?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmVuY2Vkb3JhfGVufDB8MHwwfHx8MA%3D%3D'},
         ]
-        return render_template('index.html', pagina = 'premiacoes', menu=menu, premiacoes=premiacoes)
+        return render_template('index.html', pagina = 'premiacoes', menu=menu, conteudo=premiacoes)
     return redirect(url_for('paginaLogin'))
 
 @app.route('/mudarLogin', methods=['GET'])
