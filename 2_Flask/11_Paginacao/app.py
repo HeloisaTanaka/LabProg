@@ -1,8 +1,40 @@
 from flask import Flask, request, render_template, abort, jsonify
+from models.Produto import Produto
+from models.Produtos import Produtos
 import math
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'SECRET_KEY'
 
+PRODUTOS = Produtos()
+
+p1 = Produto(1, 'notebook gamer X', 5200.00)
+p2 = Produto(2, 'mouse sem fio', 220.00)
+p3 = Produto(3, 'teclado mecânico RGB', 150.00)
+p4 = Produto(4, 'monitor 27 polegadas', 350.00)
+p5 = Produto(5, 'headset gamer 7.1', 1800.00)
+p6 = Produto(6, 'webcam full HD', 420.00)
+p7 = Produto(7, 'mousepad RGB', 280.00)
+p8 = Produto(8, 'ssd 1TB NVMe', 120.00)
+p9 = Produto(9, 'memória RAM 16GB', 450.00)
+p10 = Produto(10, 'placa de vídeo RTX 4060', 320.00)
+p11 = Produto(11, 'gabinete gamer', 2800.00)
+p12 = Produto(12, 'fonte 750W 80Plus', 380.00)
+p13 = Produto(13, 'cadeira gamer', 1200.00)
+p14 = Produto(14, 'mesa para computador', 650.00)
+p15 = Produto(15, 'hub USB 3.0', 90.00)
+p16 = Produto(16, 'cooler para processador', 180.00)
+p17 = Produto(17, 'impressora laser', 890.00)
+p18 = Produto(18, 'tablet 10 polegadas', 1500.00)
+p19 = Produto(19, 'smartphone flagship', 3500.00)
+p20 = Produto(20, 'smartwatch esportivo', 680.00)
+
+itens = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20]
+
+for item in itens:
+    PRODUTOS.adicionar(item)
+
+"""
 PRODUTOS = [
     {'id': 1, 'nome': 'notebook gamer X', 'preco': 5200.00},
     {'id': 2, 'nome': 'mouse sem fio', 'preco': 150.00},
@@ -25,10 +57,14 @@ PRODUTOS = [
     {'id': 19, 'nome': 'smartphone flagship', 'preco': 3500.00},
     {'id': 20, 'nome': 'smartwatch esportivo', 'preco': 680.00}
 ]
+"""
+
+
+
 
 @app.route('/produtos')
 def listar_produtos():
-    return render_template('produtos.html', produtos = PRODUTOS)
+    return render_template('produtos.html', produtos = PRODUTOS.getProdutos())
 
 @app.route('/produtos-paginados')
 def listas_produtos():
@@ -45,14 +81,9 @@ def listas_produtos():
 
 @app.route('/produto/<int:produto_id>')
 def detalhe_produto(produto_id):
-    produto_encontrado = None
-    for produto in PRODUTOS:
-        if produto['id'] == produto_id:
-            produto_encontrado = produto
-            break
-    if produto_encontrado is None:
+    produto_encontrado = PRODUTOS.getProd(produto_id)
+    if produto_encontrado == False:
         abort(404)
-    
     return render_template('detalhe_produto.html', produto = produto_encontrado)
 
 @app.errorhandler(404)
@@ -72,8 +103,13 @@ def buscar_produto():
     dados = request.get_json()
     nome_produto = dados.get('nome', '').lower()
     
-    resultado = [p for p in PRODUTOS if nome_produto in p['nome'].lower()]
+    resultado = [p for p in PRODUTOS if nome_produto in p.nome.lower()]
     return jsonify({'produtos_encontrados': resultado})
 
-if __name__ = '__main__':
+@app.route('/manipular')
+def manipular():
+    return render_template('manipular.html')
+
+
+if __name__ == '__main__':
     app.run(debug=True)
