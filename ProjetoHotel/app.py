@@ -13,6 +13,13 @@ def pgindex():
     perfil = session.get('perfil')
     return render_template('index.html', perfil = perfil)
 
+@app.route('/cadastro')
+def pgCadastro():
+    return render_template('cadastro.html')
+
+@app.route('/login')
+def pgLogin():
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
