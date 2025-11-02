@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, abort, request, session, redirect, url_for
-from models.users import User, Users, addUser, validarEmail, verificarLogin, searchUserByEmail, searchUserById
+from models.users import User, Users_lista, addUser, validarEmail, verificarLogin, searchUserByEmail, searchUserById
 
 user_bp = Blueprint('user_bp', __name__)
 id = 1
