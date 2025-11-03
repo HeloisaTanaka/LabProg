@@ -80,7 +80,7 @@ def validarNome(nome):
         return False
     if not isinstance(nome, str) or len(nome)<5 or len(nome)>100:
         return False
-    pattern = r'^[a-zA-ZÀ-ÿ]+$'
+    pattern = r'^[a-zA-ZÀ-ÿ\s]+$'
     return bool(re.match(pattern, nome.strip()))
 
 def validarEmail(email):

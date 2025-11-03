@@ -13,7 +13,11 @@ def cadastrar():
     confirmar_senha = request.form.get('verificador', '')
     perfil = request.form.get('perfil', '')
 
-    campos = [nome, email, senha, confirmar_senha, perfil]
+    novoUser = User(str(id), nome, email, senha, confirmar_senha, str(perfil))
+    id += 1
+    addUser(novoUser)
+    return redirect(url_for('pgLogin'))
+    """campos = [nome, email, senha, confirmar_senha, perfil]
     for campo in campos:
         if not campo:
             return render_template('cadastro.html', erro='Todos os campos devem ser preenchidos')
@@ -23,7 +27,7 @@ def cadastrar():
         addUser(novoUser)
         return redirect(url_for('login'))
     except:
-        return render_template('cadastro.html', erro='Não foi possível cadastrar o usuário')
+        return render_template('cadastro.html', erro='Não foi possível cadastrar o usuário')"""
 
 
 @user_bp.route('/login', methods=['POST'])
@@ -41,7 +45,7 @@ def logar():
         user = searchUserByEmail(email)
         session['usuario_logado'] = user['id']
         session['perfil'] = user['perfil']
-        return render_template('/')
+        return render_template('index.html')
     return render_template('/login.html', erro=statusLogin)
     
     
