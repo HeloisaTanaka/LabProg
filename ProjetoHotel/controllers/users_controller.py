@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, abort, request, session, redirect, url_for
-from models.users import User, Users, addUser, validarEmail, verificarLogin
+from models.users import User, Users_lista, addUser, validarEmail, verificarLogin, searchUserByEmail, searchUserById
 
 user_bp = Blueprint('user_bp', __name__)
 id = 1
@@ -18,7 +18,7 @@ def cadastrar():
         if not campo:
             return render_template('cadastro.html', erro='Todos os campos devem ser preenchidos')
     try:
-        novoUser = User(id, nome, email, senha, confirmar_senha, perfil)
+        novoUser = User(str(id), nome, email, senha, confirmar_senha, str(perfil))
         id += 1
         addUser(novoUser)
         return redirect(url_for('login'))
@@ -38,7 +38,9 @@ def logar():
         
     statusLogin = verificarLogin(email, senha)
     if statusLogin == True:
-        session['usuario_logado'] = email
+        user = searchUserByEmail(email)
+        session['usuario_logado'] = user['id']
+        session['perfil'] = user['perfil']
         return render_template('/')
     return render_template('/login.html', erro=statusLogin)
     

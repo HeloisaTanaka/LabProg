@@ -10,7 +10,7 @@ class User:
             self._perfil = perfil
 
     @property
-    def id(self):
+    def id_user_sistema(self):
         return self._id
 
     @property
@@ -28,6 +28,16 @@ class User:
     @property
     def perfil(self):
         return self._perfil
+    
+    @property
+    def user_dados(self):
+        user = {
+            'id': self._id,
+            'nome': self._nome,
+            'email': self._email,
+            'perfil': self._perfil
+        }
+        return user
     
     def alterarSenha(self, novaSenha):
         if validarSenha(novaSenha):
@@ -59,7 +69,7 @@ def validacao_geral(nome, email, senha, confirmar, perfil):
     erros = []
     for validade, mensagem in validacoes:
         if validade == False:
-            erros.append[mensagem]
+            erros.append(mensagem)
         
     if erros:
         raise ValueError(erros)
@@ -92,36 +102,65 @@ def validarSenha(senha, confirmar):
 
 def validarPerfil(perfil):
     if not perfil:
-        return True
-    perfils = ['administrador', 'recepcionista', 'camareira', 'hospede']
+        return False
+    perfils = ['1', '2', '3', '4']
     if not perfil in perfils:
         return False
     return True
 
 ################################################## USERS
-Users = []
-def addUser(novoUser):
-    if verificarDuplicidade(novoUser):
-        Users.append(novoUser)
-        return True
-    raise ValueError('Usuário já existe')
+
+Users_lista = []
 
 def verificarDuplicidade(novoUser):
-    for user in Users:
+    for user in Users_lista:
         if user.nome == novoUser.nome or user.email == novoUser.email:
             return False
     return True
 
 def verificarLogin(email, senha):
-    for usuario in Users:
+    for usuario in Users_lista:
         if usuario.email == email:
             if usuario.senha == senha:
                 return True
             return 'Senha incorreta'
     return 'Usuário não encontrado'
+
+############################# CRUD
+
+def addUser(novoUser):
+    if verificarDuplicidade(novoUser):
+        Users_lista.append(novoUser)
+        return True
+    raise ValueError('Usuário já existe')
+
+def alterUser(id, dado, valor):
+    for user in Users_lista:
+        if user.id_user_sistema == id:
+            setattr(user, dado, valor)
+            return True
+    return False
+
+def dellUser(id):
+    for user in Users_lista:
+        if user.id_user_sistema == id:
+            Users_lista.remove(user)
+            return True
+    return False
+
+def searchUserById(valor):
+    for user in Users_lista:
+        if user.id_user_sistema == valor:
+            return user.user_dados
+    return False
+
+def searchUserByEmail(valor):
+    for user in Users_lista:
+        if user.email == valor:
+            return user.user_dados
+    return False
+
     
-
-
 
 
             
