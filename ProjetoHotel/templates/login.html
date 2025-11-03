@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Hotel Estada Feliz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="{{ url_for('index') }}" class="logo">
+                <div>Hotel Estada Feliz</div>
+                <div class="logo-subtitle">Sistema de Gerenciamento</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('user_bp.mostrar_cadastro') }}">Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-container card">
+            <div class="text-center mb-2">
+                <h2>Acesso ao Sistema</h2>
+                <p class="text-light">Entre com suas credenciais para continuar</p>
+            </div>
+
+            {% if erro %}
+            <div class="alert alert-error">
+                {{ erro }}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('user_bp.logar') }}">
+                <div class="form-group">
+                    <label for="email" class="form-label">E-mail:</label>
+                    <input type="email" id="email" name="email" class="form-input" required value="{{ request.form.email if request.form }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" id="senha" name="senha" class="form-input" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Entrar no Sistema</button>
+            </form>
+
+            <div class="text-center mt-2">
+                <p class="text-light">Não possui uma conta? <a href="{{ url_for('user_bp.mostrar_cadastro') }}">Cadastre-se aqui</a></p>
+                <p><a href="{{ url_for('index') }}">Voltar para a página inicial</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

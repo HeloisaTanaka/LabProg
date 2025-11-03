@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Hotel Estada Feliz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="{{ url_for('index') }}" class="logo">
+                <div>Hotel Estada Feliz</div>
+                <div class="logo-subtitle">Sistema de Gerenciamento</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('logout') }}">Sair</a></li>
+            </ul>
+            <div class="user-info">
+                <span>{{ session.usuario_logado }} ({{ session.perfil_usuario }})</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Painel de Controle</h1>
+            <p>Bem-vindo ao sistema de gerenciamento do Hotel Estada Feliz</p>
+        </div>
+
+        {% if session.perfil_usuario == 'administrador' %}
+        <!-- Dashboard Administrador -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">{{ total_usuarios or '0' }}</div>
+                <div>Usuários Cadastrados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ total_quartos or '0' }}</div>
+                <div>Quartos Disponíveis</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ total_reservas or '0' }}</div>
+                <div>Reservas Ativas</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h3>Gestão de Usuários</h3>
+                    <p class="text-light">Gerencie todos os usuários do sistema</p>
+                    <button class="btn btn-primary mt-1">Gerenciar Usuários</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h3>Relatórios Financeiros</h3>
+                    <p class="text-light">Acesse relatórios e analytics</p>
+                    <button class="btn btn-primary mt-1">Ver Relatórios</button>
+                </div>
+            </div>
+        </div>
+
+        {% elif session.perfil_usuario == 'recepcionista' %}
+        <!-- Dashboard Recepcionista -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">{{ checkins_hoje or '0' }}</div>
+                <div>Check-ins Hoje</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ checkouts_hoje or '0' }}</div>
+                <div>Check-outs Hoje</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ quartos_disponiveis or '0' }}</div>
+                <div>Quartos Disponíveis</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Gestão de Reservas</h3>
+            <p class="text-light">Gerencie as reservas e estadias do dia</p>
+            <div class="row mt-1">
+                <div class="col">
+                    <button class="btn btn-primary btn-block">Ver Reservas</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-success btn-block">Fazer Check-in</button>
+                </div>
+            </div>
+        </div>
+
+        {% elif session.perfil_usuario == 'camareira' %}
+        <!-- Dashboard Camareira -->
+        <div class="card">
+            <h3>Status de Limpeza dos Quartos</h3>
+            <p class="text-light">Controle e atualize o status de limpeza</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">{{ quartos_sujos or '0' }}</div>
+                    <div>Quartos para Limpar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ quartos_limpando or '0' }}</div>
+                    <div>Em Limpeza</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ quartos_limpos or '0' }}</div>
+                    <div>Quartos Prontos</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary">Ver Lista Completa de Quartos</button>
+        </div>
+
+        {% elif session.perfil_usuario == 'hospede' %}
+        <!-- Dashboard Hóspede -->
+        <div class="card">
+            <h3>Minha Estadia</h3>
+            <p class="text-light">Informações sobre sua reserva atual</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">#{{ reserva_atual.id if reserva_atual else '--' }}</div>
+                    <div>Número da Reserva</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ reserva_atual.quarto if reserva_atual else '--' }}</div>
+                    <div>Quarto</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">R$ {{ reserva_atual.valor if reserva_atual else '0' }}</div>
+                    <div>Valor Total</div>
+                </div>
+            </div>
+            
+            <div class="row mt-1">
+                <div class="col">
+                    <button class="btn btn-primary btn-block">Detalhes da Reserva</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-success btn-block">Solicitar Serviços</button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card">
+            <h3>Acesso Rápido</h3>
+            <p class="text-light">Funcionalidades disponíveis para seu perfil</p>
+            <div class="row mt-1">
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="https://via.placeholder.com/50x50/8B7355/FFFFFF?text=P" alt="Perfil" class="mb-1">
+                        <h4>Meu Perfil</h4>
+                        <p class="text-light">Gerencie suas informações pessoais</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="https://via.placeholder.com/50x50/8B7355/FFFFFF?text=A" alt="Ajuda" class="mb-1">
+                        <h4>Ajuda</h4>
+                        <p class="text-light">Suporte e documentação</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
