@@ -1,11 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {{ perfil }}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container dashboard">
+    <div class="profile-card">
+        <h1>Bem-vindo ao Sistema</h1>
+        <div class="profile-badge" id="profileBadge">
+            {{ 'Administrador' if perfil == '1' }}
+            {{ 'Recepcionista' if perfil == '2' }}
+            {{ 'Camareira' if perfil == '3' }}
+            {{ 'Hóspede' if perfil == '4' }}
+        </div>
+    </div>
+
+    <div class="btn-group">
+        {% if perfil == '1' %}
+            <a href="#" class="btn btn-primary">Painel Administrativo</a>
+            <a href="#" class="btn btn-secondary">Gerenciar Usuários</a>
+            <a href="#" class="btn btn-success">Relatórios</a>
+        {% elif perfil == '2' %}
+            <a href="#" class="btn btn-primary">Check-in/out</a>
+            <a href="#" class="btn btn-secondary">Ver Reservas</a>
+            <a href="#" class="btn btn-success">Disponibilidade</a>
+        {% elif perfil == '3' %}
+            <a href="#" class="btn btn-primary">Quartos para Limpeza</a>
+            <a href="#" class="btn btn-secondary">Status de Limpeza</a>
+        {% elif perfil == '4' %}
+            <a href="#" class="btn btn-primary">Minha Reserva</a>
+            <a href="#" class="btn btn-secondary">Serviços</a>
+            <a href="#" class="btn btn-success">Histórico</a>
+        {% endif %}
+        <a href="/logout" class="btn btn-danger">Sair</a>
+    </div>
+</div>
+{% endblock %}
