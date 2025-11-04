@@ -1,35 +1,89 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container dashboard">
-    <div class="profile-card">
-        <h1>Bem-vindo ao Sistema</h1>
-        <div class="profile-badge" id="profileBadge">
-            {{ 'Administrador' if perfil == '1' }}
-            {{ 'Recepcionista' if perfil == '2' }}
-            {{ 'Camareira' if perfil == '3' }}
-            {{ 'Hóspede' if perfil == '4' }}
+<div class="dashboard">
+    <div class="container">
+        <div class="profile-card">
+            <h1>Bem-vindo ao Sistema</h1>
+            <div class="profile-badge">
+                {% if perfil == '1' %}Administrador
+                {% elif perfil == '2' %}Recepcionista
+                {% elif perfil == '3' %}Camareira
+                {% elif perfil == '4' %}Hóspede
+                {% endif %}
+            </div>
         </div>
-    </div>
 
-    <div class="btn-group">
         {% if perfil == '1' %}
-            <a href="#" class="btn btn-primary">Painel Administrativo</a>
-            <a href="#" class="btn btn-secondary">Gerenciar Usuários</a>
-            <a href="#" class="btn btn-success">Relatórios</a>
-        {% elif perfil == '2' %}
-            <a href="#" class="btn btn-primary">Check-in/out</a>
-            <a href="#" class="btn btn-secondary">Ver Reservas</a>
-            <a href="#" class="btn btn-success">Disponibilidade</a>
-        {% elif perfil == '3' %}
-            <a href="#" class="btn btn-primary">Quartos para Limpeza</a>
-            <a href="#" class="btn btn-secondary">Status de Limpeza</a>
-        {% elif perfil == '4' %}
-            <a href="#" class="btn btn-primary">Minha Reserva</a>
-            <a href="#" class="btn btn-secondary">Serviços</a>
-            <a href="#" class="btn btn-success">Histórico</a>
+        <div class="dashboard-section">
+            <h2>Painel de Gestão Total</h2>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Gerenciar Usuários</a>
+                <a href="#" class="btn btn-primary">Definir Preços de Diárias</a>
+                <a href="#" class="btn btn-primary">Configurar Tipos de Quarto</a>
+                <a href="#" class="btn btn-success">Relatórios Financeiros</a>
+                <a href="#" class="btn btn-secondary">Visualizar Todas as Reservas</a>
+                <a href="#" class="btn btn-secondary">Gestão de Hóspedes</a>
+            </div>
+        </div>
         {% endif %}
-        <a href="/logout" class="btn btn-danger">Sair</a>
+
+        {% if perfil == '2' %}
+        <div class="dashboard-section">
+            <h2>Terminal de Check-in/out</h2>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Criar Nova Reserva</a>
+                <a href="#" class="btn btn-primary">Realizar Check-in</a>
+                <a href="#" class="btn btn-primary">Realizar Check-out</a>
+                <a href="#" class="btn btn-secondary">Visualizar Reservas</a>
+                <a href="#" class="btn btn-secondary">Alterar Reservas</a>
+                <a href="#" class="btn btn-success">Disponibilidade de Quartos</a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if perfil == '3' %}
+        <div class="dashboard-section">
+            <h2>Lista de Quartos</h2>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Quartos para Limpeza</a>
+                <a href="#" class="btn btn-secondary">Atualizar Status de Limpeza</a>
+                <a href="#" class="btn btn-success">Visualizar Todos os Quartos</a>
+            </div>
+            
+            <div class="rooms-status">
+                <div class="status-item">
+                    <span class="status-dot dirty"></span>
+                    <span>Sujo</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot cleaning"></span>
+                    <span>Limpando</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot clean"></span>
+                    <span>Limpo</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if perfil == '4' %}
+        <div class="dashboard-section">
+            <h2>Painel Pessoal</h2>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Minha Reserva Atual</a>
+                <a href="#" class="btn btn-primary">Histórico de Estadias</a>
+                <a href="#" class="btn btn-primary">Minhas Faturas</a>
+                <a href="#" class="btn btn-secondary">Solicitar Serviços de Quarto</a>
+                <a href="#" class="btn btn-secondary">Contatar Recepção</a>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="btn-group">
+            <a href="/logout" class="btn btn-danger">Sair do Sistema</a>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -286,6 +286,126 @@ body {
     text-decoration: underline;
 }
 
+.dashboard-section {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(90, 76, 62, 0.08);
+    margin-bottom: 2rem;
+    border: 1px solid #f0ebe6;
+}
+
+.dashboard-section h2 {
+    color: #5a4c3e;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.rooms-status {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e8e0d7;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: #5a4c3e;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.dirty {
+    background: #e74c3c;
+}
+
+.status-dot.cleaning {
+    background: #f39c12;
+}
+
+.status-dot.clean {
+    background: #27ae60;
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    min-width: 200px;
+}
+
+.btn-primary {
+    background: #8b7355;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #7a6348;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+}
+
+.btn-secondary {
+    background: #a89f8e;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #958c7a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(168, 159, 142, 0.3);
+}
+
+.btn-success {
+    background: #9a8c76;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #887a65;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(154, 140, 118, 0.3);
+}
+
+.btn-danger {
+    background: #c4b5a3;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #b2a391;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(196, 181, 163, 0.3);
+}
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -309,5 +429,24 @@ body {
     .btn {
         width: 100%;
         max-width: 300px;
+    }
+        .dashboard-section {
+        padding: 1.5rem;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .rooms-status {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
     }
 }
