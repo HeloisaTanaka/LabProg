@@ -27,11 +27,11 @@
         <ul>
         {% for produto in produtos %}
             <li>
-                <form action="{{ url_for('alterarProd', id = produto.id) }}" method="POST">
+                <form action="{{ url_for('produtos_bp.alterarProd', id = produto.id) }}" method="POST">
                     Nome: <input type="text" value="{{ produto.nome }}" name="nome"> 
                     <p></p>
                     Preço: <input type="text" value="{{ produto.preco }}" name="preco">  
-                    <a href="{{ url_for('excluirProd', id = produto.id) }}">Excluir</a>
+                    <a href="{{ url_for('produtos_bp.excluirProd', id = produto.id) }}">Excluir</a>
                 <button type="submit">Alterar</button>
                 </form>
             </li>

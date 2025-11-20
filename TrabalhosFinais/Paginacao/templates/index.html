@@ -7,11 +7,11 @@
 </head>
 <body>
     <h1>Index</h1>
-    <a href="/produtos">
+    <a href="{{ url_for('produtos_bp.produtos_paginados') }}">
         Consultar Produtos
     </a>
     <br>
-    <a href="/manipular">
+    <a href="{{ url_for('produtos_bp.pgManipular') }}">
         Manipular Produtos
     </a>
 </body>
