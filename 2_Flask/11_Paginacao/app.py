@@ -34,7 +34,7 @@ itens = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, 
 for item in itens:
     PRODUTOS.adicionar(item)
 
-"""
+
 PRODUTOS = [
     {'id': 1, 'nome': 'notebook gamer X', 'preco': 5200.00},
     {'id': 2, 'nome': 'mouse sem fio', 'preco': 150.00},
@@ -57,14 +57,14 @@ PRODUTOS = [
     {'id': 19, 'nome': 'smartphone flagship', 'preco': 3500.00},
     {'id': 20, 'nome': 'smartwatch esportivo', 'preco': 680.00}
 ]
-"""
+
 
 
 
 
 @app.route('/produtos')
 def listar_produtos():
-    return render_template('produtos.html', produtos = PRODUTOS.getProdutos())
+    return render_template('produtos.html', produtos = PRODUTOS)
 
 @app.route('/produtos-paginados')
 def listas_produtos():
@@ -86,7 +86,7 @@ def detalhe_produto(produto_id):
         abort(404)
     return render_template('detalhe_produto.html', produto = produto_encontrado)
 
-@app.errorhandler(404)
+"""@app.errorhandler(404)
 def pagina_nao_encontrada(error):
     return render_template('404.html'), 404
 
@@ -96,7 +96,7 @@ def pagina_proibida(error):
 
 @app.errorhandler(401)
 def pagina_nao_autorizada(error):
-    return render_template('401.html'), 401
+    return render_template('401.html'), 401"""
 
 @app.route('/api/buscar-produto', methods=['POST'])
 def buscar_produto():
