@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paginados</title>
+    <title>Produtos Paginados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+    <div class="buttons">
+        <a href="/">
+            <button class="btn">Voltar para Home</button>
+        </a>
+    </div>
+
+    <h1>Produtos Paginados</h1>
     
-</body>
-</html>
-
-
-<h1>Paginados</h1>
-<a href="/">Volta para home</a>
-
-<ul>
-    {% for produto in produtos %}
-        <li>
-            <a href="{{ url_for('produtos_bp.detalhes', id = produto.id) }}">{{ produto.nome }}</a> : {{ produto.preco }}
-        </li>
-    {% endfor %}
-</ul>
-
-<nav>
-    <ul class="pagination">
-        {% for page_num in range(1, total_pages+1) %}
-        <li class="page-item {% if page == page_num %} active{% endif %}">
-            <a class="page-link" href="{{ url_for('produtos_bp.produtos_paginados', page=page_num) }}">
-                {{ page_num }}
+    <div class="container">
+        {% for produto in produtos %}
+        <div class="produtos">
+            <a class="produto-nome" href="{{ url_for('produtos_bp.detalhes', id = produto.id) }}">
+                {{ produto.nome }}
             </a>
-        </li>
+            <span class="produto-preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+        </div>
         {% endfor %}
-    </ul>
-</nav>
+    </div>
+
+    <nav>
+        <ul class="pagination">
+            {% for page_num in range(1, total_pages+1) %}
+            <li class="{% if page == page_num %}active{% endif %}">
+                <a href="{{ url_for('produtos_bp.produtos_paginados', page=page_num) }}">
+                    {{ page_num }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</body>
+
+</html>

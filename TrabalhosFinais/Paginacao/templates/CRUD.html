@@ -4,42 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="buttons">
+        <a href="/">
+            <button class="btn">Voltar para home</button>
+        </a>
+    </div>
     <h1>Manipular Produtos</h1>
-    <a href="/">Volta para home</a>
 
-    <div class="adicionar"> 
-        <h2>Adicionar</h2> 
-        <br>
-        <form action="adicionarProd", method='POST'>
-            Nome: <input type="text" name="nome" required>
-            <p></p>
-            Preço: <input type="text" name="preco" required>
-            <button type="submit">Adicionar produto</button>
-        </form>
+    <div class="forms-container">
+        <div class="form-section">
+            <h3>Adicionar Produto</h3>
+            <form action="{{ url_for('produtos_bp.adicionarProd') }}" method="POST">
+                Nome: <input type="text" name="nome" required placeholder="Nome do produto">
+                Preço: <input type="text" name="preco" required placeholder="Preço do produto">
+                <button type="submit">Adicionar</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h3>Alterar Produto</h3>
+            <p>Para alterar um produto, encontre-o na lista abaixo e use o formulário específico dele.</p>
+        </div>
     </div>
 
-
-    <div class="excluir-alterar">
-        <h2>Produtos</h2> 
-        
-        <ul>
+    <div class="container">
+        <h2>Produtos</h2>
         {% for produto in produtos %}
-            <li>
-                <form action="{{ url_for('produtos_bp.alterarProd', id = produto.id) }}" method="POST">
-                    Nome: <input type="text" value="{{ produto.nome }}" name="nome"> 
-                    <p></p>
-                    Preço: <input type="text" value="{{ produto.preco }}" name="preco">  
-                    <a href="{{ url_for('produtos_bp.excluirProd', id = produto.id) }}">Excluir</a>
-                <button type="submit">Alterar</button>
+        <div class="produtos">
+            <div class="produto-info">
+                <span class="produto-id">{{ produto.id }}</span>
+                <span class="produto-nome">{{ produto.nome }}</span>
+                <span class="produto-preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+            </div>
+            
+            <div class="produto-actions">
+                <form action="{{ url_for('produtos_bp.alterarProd', id = produto.id) }}" method="POST" class="inline-form">
+                    <input type="text" value="{{ produto.nome }}" name="nome" required>
+                    <input type="text" value="{{ produto.preco }}" name="preco" required>
+                    <button type="submit">Alterar</button>
                 </form>
-            </li>
-            <br>
+                
+                <a href="{{ url_for('produtos_bp.excluirProd', id = produto.id) }}" class="delete-link">Excluir</a>
+            </div>
+        </div>
         {% endfor %}
-        </ul>
     </div>
-   
 </body>
 </html>
 

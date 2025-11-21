@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <h1>Index</h1>
-    <a href="{{ url_for('produtos_bp.produtos_paginados') }}">
-        Consultar Produtos
-    </a>
-    <br>
-    <a href="{{ url_for('produtos_bp.pgManipular') }}">
-        Manipular Produtos
-    </a>
-</body>
-</html>
 
+<body>
+    <div class="container">
+        <div class="product-detail-container">
+            <h1>Bem-vindo ao Sistema de Produtos</h1>
+            <p>Escolha uma das opções abaixo para começar:</p>
+            
+            <div class="forms-container">
+                <div class="form-section">
+                    <h3>Consultar Produtos</h3>
+                    <p>Visualize todos os produtos disponíveis com paginação</p>
+                    <a href="{{ url_for('produtos_bp.produtos_paginados') }}" class="back-link" style="text-align: center; margin-top: auto;">
+                        Acessar Produtos
+                    </a>
+                </div>
+
+                <div class="form-section">
+                    <h3>Manipular Produtos</h3>
+                    <p>Adicione, edite ou remova produtos do sistema</p>
+                    <a href="{{ url_for('produtos_bp.pgManipular') }}" class="back-link" style="text-align: center; margin-top: auto;">
+                        Gerenciar Produtos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
 <!--
     1. Consultar produtos (paginados.html)
     2. Manipular produtos (CRUD.html)
